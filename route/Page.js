@@ -1,0 +1,15 @@
+const PageRoute = require("express").Router();
+
+PageRoute.get("/", (req, res) => {
+    res.sendFile("../public/index.html");
+});
+PageRoute.get("/login", (req, res) => {
+    res.sendFile("../public/login.html");
+});
+PageRoute.get("/register", (req, res) => {
+    res.sendFile("../public/register.html");
+});
+PageRoute.get("/dashboard", (req, res) => {
+    res.sendFile("../public/dashboard.html");
+});
+module.exports = PageRoute;

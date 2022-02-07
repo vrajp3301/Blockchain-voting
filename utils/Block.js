@@ -1,6 +1,6 @@
 const SHA256 = require("crypto-js/sha256");
 
-module.exports = class Block {
+class Block {
     constructor(index, timestamp, data, prevHash = " ") {
         this.index = index;
         this.timestamp = timestamp;
@@ -9,14 +9,14 @@ module.exports = class Block {
         this.hash = this.computeHash();
     }
     computeHash() {
-        return SHA256(
-            this.index +
-                "#_#" +
-                this.prevHash +
-                "#_#" +
-                this.timestamp +
-                "#_#" +
-                JSON.stringify(this.data)
-        ).toString();
+        let dataBlock = [
+            this.index,
+            this.prevHash,
+            this.timestamp,
+            JSON.stringify(this.data),
+        ];
+        return SHA256(dataBlock.join("_#_")).toString();
     }
-};
+}
+
+module.exports = Block;

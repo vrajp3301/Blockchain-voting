@@ -4,15 +4,18 @@
     "description": "Implementation of Blockchain using NodeJS",
     "main": "Index.js",
     "dependencies": {
+        "compression": "^1.7.4",
+        "connect-mongodb-session": "^3.1.1",
+        "cors": "^2.8.5",
         "crypto-js": "^4.1.1",
         "express": "^4.17.1",
+        "express-session": "^1.17.2",
         "ip": "^1.1.5",
         "jsonwebtoken": "^8.5.1",
-        "mongodb": "^4.0.1"
+        "mongoose": "^6.2.0"
     },
-    "devDependencies": {},
     "scripts": {
-        "start": "node Index.js"
+        "start": "node index.js"
     },
     "repository": {
         "type": "git",
