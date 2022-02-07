@@ -8,7 +8,7 @@ const PPModel = db.model(
         chairman: { type: String, required: true, unique: true },
         viceChairman: { type: String, required: true, unique: true },
         description: { type: String },
-        established: { type: Date },
+        established: { type: String },
     }),
     "PoliticalParty"
 );

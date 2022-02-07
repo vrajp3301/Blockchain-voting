@@ -33,10 +33,10 @@ class Blockchain {
         }
         return true;
     }
-    exists(v_id) {
+    exists(voterId) {
         for (let i = 1; i < this.chain.length; i++) {
-            const curr_v_id = this.chain[i].data.v_id;
-            if (curr_v_id == v_id) {
+            const currVoterId = this.chain[i].data.voterId;
+            if (currVoterId == voterId) {
                 return true;
             }
         }

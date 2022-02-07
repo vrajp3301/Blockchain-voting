@@ -1,6 +1,47 @@
 const CandidateModel = require("../models/Candidate");
+const PPModel = require("../models/PoliticalParty");
 const response = require("../utils/Response");
 const OId = require("mongoose").Types.ObjectId;
+
+const PartyRegister = (req, res) => {
+    /**
+     * BODY: name, chairman, viceChairman, description, established
+     */
+    const query = new PPModel({
+        name: req.body.name,
+        chairman: req.body.chairman,
+        viceChairman: req.body.viceChairman,
+        description: req.body.description,
+        established: req.body.established,
+    });
+    query.save().then(
+        (result) => {
+            return response(res, true, "Registration Successful");
+        },
+        (err) => {
+            return response(res, false, "Unable to Register", err);
+        }
+    );
+};
+const CandidateRegister = (req, res) => {
+    /**
+     * BODY: userId, partyId, state, description
+     */
+    const query = new CandidateModel({
+        userId: req.body.userId,
+        partyId: req.body.partyId,
+        state: req.body.state,
+        description: req.body.description,
+    });
+    query.save().then(
+        (result) => {
+            return response(res, true, "Registration Successful");
+        },
+        (err) => {
+            return response(res, false, "Unable to Register", err);
+        }
+    );
+};
 const Candidate = (req, res) => {
     let query = {};
     if (req.body.candidateId) query._id = OId(req.body.candidateId);
@@ -15,4 +56,4 @@ const Candidate = (req, res) => {
     );
 };
 
-module.exports = { Candidate };
+module.exports = { Candidate, PartyRegister, CandidateRegister };
