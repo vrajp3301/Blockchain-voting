@@ -2,6 +2,19 @@ const BlockChainModel = require("../models/BlockChain");
 const Blockchain = require("../utils/Blockchain");
 const response = require("../utils/Response");
 const blockchain = new Blockchain();
+(() => {
+    BlockChainModel.find({}).then(
+        async (result) => {
+            await result.forEach((value, index) => {
+                blockchain.newBlock(value.timestamp, value.data);
+            });
+            console.log("Blockchain Created: ", blockchain.chain.length);
+        },
+        (err) => {
+            console.log("Error Creating the block chain");
+        }
+    );
+})();
 
 const Vote = (req, res) => {
     /**
@@ -17,7 +30,7 @@ const Vote = (req, res) => {
             vote: req.body.candidateId,
         });
         if (resp == true) {
-            let lb = blockchain.lastBlock();
+            let lb = blockchain.lastBlock;
             const query = new BlockChainModel({
                 index: lb.index,
                 timestamp: lb.timestamp,
@@ -36,9 +49,8 @@ const Vote = (req, res) => {
         }
     }
 };
-
 const isValidChain = (req, res) => {
-    let isVaild = blockchain.isValidChain();
+    let isVaild = blockchain.isValidChain;
     return response(res, true, "Valid Chain Success", {
         isValid: isVaild,
         lastHash: blockchain.lastBlock.hash,

@@ -34,6 +34,7 @@ app.use(
 app.use("/", require("./route/Page"));
 app.use("/user", require("./route/User"));
 app.use("/pp", require("./route/PP"));
+app.use("/bc", require("./route/BlockChain"));
 // Starting the server.
 /*db.getDB()
         .collection(db_block)

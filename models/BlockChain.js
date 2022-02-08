@@ -6,7 +6,7 @@ const BlockChainModel = db.model(
     new mongoose.Schema({
         index: { type: String, required: true, unique: true },
         timestamp: { type: String, required: true },
-        data: { required: true },
+        data: {},
         prevHash: { type: String, required: true },
         hash: { type: String, required: true },
     }),
