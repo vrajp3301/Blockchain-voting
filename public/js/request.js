@@ -6,6 +6,7 @@ $(document).ready(() =>  {
         $.post('http://localhost:8501/user/otp',{aadharId, voterId}, (data) => {
             if(data.success) {
                 console.log(data.data);
+                alert(data.data);
             }
             else{
                 console.log("Invalid OTP");
@@ -19,7 +20,7 @@ $(document).ready(() =>  {
         const otp = $('#otp').val()
         $.post('http://localhost:8501/user/login',{aadharId, voterId, otp}, (data) => {
             if(data.success) {
-                alert("Login Successful")
+                window.location.href = "http://localhost:8501/votingpage.html";
             }
             else{
                 alert("Invlaid OTP")
@@ -27,5 +28,6 @@ $(document).ready(() =>  {
         })
         
     })
+
 })
 

@@ -12,4 +12,7 @@ PageRoute.get("/register", (req, res) => {
 PageRoute.get("/dashboard", (req, res) => {
     res.sendFile("../public/dashboard.html");
 });
+PageRoute.get("/candidates", (req, res) => {
+    res.sendFile("../public/candidates.html");
+});
 module.exports = PageRoute;
