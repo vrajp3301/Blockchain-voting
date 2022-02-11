@@ -31,7 +31,7 @@ const Login = async (req, res) => {
     const user = await UserModel.findOne(
         { aadharId: req.body.aadharId, voterId: req.body.voterId },
         { otp: 1, isVerified: 1, fname: 1, lname: 1 }
-        );
+    );
     if (user === null) return response(res, false, "Please verify the details");
     else if (user.otp === parseInt(req.body.otp)) {
         req.session.user = {
@@ -41,10 +41,15 @@ const Login = async (req, res) => {
             aadharId: req.body.aadharId,
             voterId: req.body.voterId,
         };
-        return response(res, true, "Login Successful", {
-            isVerified: true,
-            fname: 1,
-            lname: 1,
+        UserModel.updateOne(
+            { aadharId: req.body.aadharId, voterId: req.body.voterId },
+            { $set: { otp: null } }
+        ).then(() => {
+            return response(res, true, "Login Successful", {
+                isVerified: true,
+                fname: user.fname,
+                lname: user.lname,
+            });
         });
     } else {
         return response(res, false, "Invalid OTP");
