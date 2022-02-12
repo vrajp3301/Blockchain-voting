@@ -26,7 +26,7 @@ const PartyRegister = (req, res) => {
 const CandidateRegister = (req, res) => {
     /**
      * BODY: userId, partyId, state, description
-     */
+    */
     const query = new CandidateModel({
         userId: req.body.userId,
         partyId: req.body.partyId,
@@ -55,5 +55,18 @@ const Candidate = (req, res) => {
         }
     );
 };
+const Party = (req, res) => {
+    let query = {};
+    if (req.body.partyId) query._id = OId(req.body.partyId);
+    PPModel.find(query).then(
+        (result) => {
+            console.log(result);
+            return response(res, true, "Party fetch Success", result);
+        },
+        (err) => {
+            return response(res, false, "Unable to fetch party", err);
+        }
+    );
+};
 
-module.exports = { Candidate, PartyRegister, CandidateRegister };
+module.exports = { Candidate, PartyRegister, CandidateRegister, Party };
